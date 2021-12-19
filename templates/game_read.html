@@ -1,0 +1,89 @@
+{% extends 'main_template.html' %}
+
+{% block title %} Main Page {% endblock %}
+
+{% block page %}
+    {% if user.is_authenticated %}
+
+        Welcome {{user.username}} <br>
+        <a href="{% url 'logout' %}"> Logout<i class="fas fa-door-open"></i></a>
+    {% else %}
+        <a href="{% url 'login' %}"><button type="button" class="btn btn-light">Zaloguj się</button></a>
+    {% endif %}
+
+    <hr>
+
+
+                   <h2> Games in database:</h2>
+
+        {% for game in Games%}
+
+<div class="card" style="width: 26rem;">
+  <div class="card-body">
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-5">
+
+
+        <img src="/media/{{game.iko}}" class="game-iko">
+
+
+
+
+
+        </div>
+        <div class="col">
+                <h5 class="card-title">{{ game.title }}</h5>
+
+        </div>
+
+
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">{{game.metacritick_rating}}</h6>
+    <p class="card-text">{{game.text}}</p>
+      <a href="{% url 'edit' game.id %}" class="card-link"><i class="fas fa-edit"></i></a>
+      <br>
+      <a href="{% url 'delete' game.id %}" class="card-link"><i class="fas fa-trash-alt"></i></a>
+
+
+
+            </div>
+      </div>
+  </div>
+</div>
+
+
+
+                   {% endfor %}
+
+
+
+
+        {% if Games|length == 0 %}
+
+            <h2> DATABASE IS EMPTY</h2>
+        {% else %}
+            <h3> <center> Games in database: {{Games|length}}</center> </h3>
+
+
+
+        {% endif %}
+
+<div class="card">
+    <div class="p-3 mb-2 bg-dark text-white">
+  <div class="card-body">
+
+<button type="button" class="btn btn-light">
+
+      <a href="{% url 'add' %}">Add new Game <i class="fas fa-plus"></i></a>
+</button>
+
+
+
+
+    </body>
+    </html>
+{% endblock %}

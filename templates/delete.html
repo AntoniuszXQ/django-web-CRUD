@@ -1,0 +1,11 @@
+<hr>
+
+    <h3>Do you want to delete? : {{game.title}} </h3>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit"> Yes </button>
+
+
+    </form>
+ <a href="{% url 'read' %}">Back</a>

@@ -1,0 +1,29 @@
+{% extends 'main_template.html' %}
+
+{% load bootstrap %}
+
+{% block title %} Login {% endblock %}
+
+
+{% block page %}
+
+    <div class="card" style="width: 30rem;">
+      <div class="card-body">
+        <h5 class="card-title">Zaloguj się <i class="fas fa-flag"></i></h5>
+              <form method="post">
+
+        {% csrf_token %}
+        {{ form|bootstrap }}
+
+        <br>
+                  <div class="p-3 mb-2 bg-dark text-white">
+        <button type="submit" class="btn btn-light">Login
+
+            <i class="fas fa-check"></i>
+
+                  </div>
+        </button>
+    </form>
+
+    </div>
+    {% endblock %}

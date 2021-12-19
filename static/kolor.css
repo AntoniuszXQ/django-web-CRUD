@@ -1,0 +1,10 @@
+body {
+  padding: 2rem;
+  color: grey;
+}
+
+.game-iko {
+    width: 150px ;
+    float: left ;
+
+}
