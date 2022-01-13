@@ -16,10 +16,13 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from Gameweb.views import read ,add , update , delete
+from Gameweb.views import read ,add , update , delete , api_get
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,7 +30,9 @@ urlpatterns = [
     path('add/', add,name='add'),
     path('update/<int:id>',update,name='edit'),
     path('delete/<int:id>',delete,name='delete'),
-    path('login/',auth_views.LoginView.as_view(),name="login"),
-    path('logout/',auth_views.LogoutView.as_view(),name='logout')
+    path('',auth_views.LoginView.as_view(),name="login"),
+    path('logout/',auth_views.LogoutView.as_view(),name='logout'),
+    path('api/<int:id>',api_get),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

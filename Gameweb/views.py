@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import Game
 from .forms import GameForm
 from django.contrib.auth.decorators import login_required
+import json
+
 
 
 def read(request):
@@ -38,3 +40,19 @@ def delete(request,id):
         return redirect(read)
 
     return  render(request,'delete.html',{'game':game})
+
+
+def api_get(request,id):
+    if request.method == 'GET':
+
+        try:
+            game=Game.objects.get(pk=id)
+            response = json.dumps([{'id':game.id,
+                                    'title':game.title,
+                                    'text':game.text,
+                                    'metacritick_rating':float(game.metacritick_rating)
+                                    }])
+        except :
+            response = json.dumps([{'Error':game.metacritick_rating}])
+
+    return HttpResponse(response,content_type='text/json')
